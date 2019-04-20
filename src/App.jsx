@@ -12,7 +12,7 @@ class App extends Component {
           <NavLink to="/list" activeCLassName="active">Products</NavLink>
           <NavLink to="/about" activeCLassName="active">About</NavLink>
         </nav>
-        <Route path="/" component={() => <h1>Home</h1>} />
+        <Route exact path="/" component={() => <h1>Home</h1>} />
         <Route exact path="/list" component={ProductsList} />
         <Route exact path="/list/:id" component={() => <h1>Simple product</h1>} />
         <Route exact path="/about" component={() => <h1>About (todo)</h1>} />
