@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import ProductCard from './ProductCard';
-import './ProductList.css';
 import Loader from '../Utils/Loader';
+
+import './ProductList.css';
 
 class ProductsList extends Component {
   constructor(props) {

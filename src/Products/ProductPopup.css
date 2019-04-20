@@ -1,0 +1,38 @@
+.popup {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.popup-content {
+  overflow: hidden;
+  position: absolute;
+  top: 50px;
+  left: calc(50% - 600px / 2);
+  border-radius: 8px;
+  background-color: white;
+  width: 600px;
+}
+
+.popup-image {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.popup-content {
+  font-size: 1.2rem;
+}
+
+.popup-content h1 {
+  font-size: 2rem;
+  margin: 1rem;
+}
+
+.popup-content-price {
+  margin: 1rem;
+  margin-bottom: 1rem;
+}
