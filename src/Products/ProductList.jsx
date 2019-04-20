@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import './ProductList.css';
+import Loader from '../Utils/Loader';
 
 class ProductsList extends Component {
   constructor(props) {
@@ -30,9 +32,12 @@ class ProductsList extends Component {
       <div>
         <h1>Fresh fruits and vegetables, and very expensive meat</h1>
         <div className="grid">
+          {products.length === 0 && <Loader />}
           {products.map(product =>
-            <div className="col" key={product.id} >
-              <ProductCard product={product} />
+            <div className="col" key={product.product_id} >
+              <Link to={`/list/${product.product_id}`}>
+                <ProductCard product={product} />
+              </Link>
             </div>)}
         </div>
       </div>
