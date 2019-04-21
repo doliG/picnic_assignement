@@ -1,3 +1,25 @@
+.page-title {
+  font-size: 3rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.search {
+  font-size: 1.5rem;
+  border: 5px solid lightgrey;
+  border-radius: 5px;
+  padding: .5rem;
+  margin: 1rem auto;
+  display: block;
+}
+.search:focus {
+}
+
+.content-width {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .grid {
   /* Todo */
   display: flex;

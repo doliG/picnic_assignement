@@ -11,7 +11,10 @@ class ProductsList extends Component {
     super(props);
     this.state = {
       products: [],
+      filteredProducts: [],
+      status: 'fetching' // 'fetching' || 'ok' || 'error'
     };
+    this.onChange = this.onChange.bind(this);
   }
 
   componentWillMount() {
@@ -20,27 +23,54 @@ class ProductsList extends Component {
     fetch(url)
       .then(res => {
         res.json().then(data => {
-          this.setState({ products: data.products });
+          const { products } = data;
+          this.setState({
+            products,
+            filteredProducts: products,
+            status: 'ok'
+          });
           console.log(this.state.products);
         });
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        // In order to handle error while fetching from api, we just need
+        // to create some components to display errors.
+        // We can too store err in our state to display advanced message/help.
+        this.setState({ status: 'error' });
+      });
+  }
+
+  onChange(evt) {
+    const wanted = evt.target.value;
+    if (!wanted)
+      this.setState({ filteredProducts: products });
+    const { products } = this.state;
+    const filteredProducts = products.filter(p => p.name.toLowerCase().includes(wanted.toLowerCase()));
+    this.setState({ filteredProducts });
   }
 
   render() {
-    const { products } = this.state;
+    const { filteredProducts, status } = this.state;
+    const { onChange } = this;
 
     return (
       <div>
-        <h1>Fresh fruits and vegetables, and very expensive meat</h1>
+        <div className="content-width">
+          <h1 className="page-title">Fresh fruits and vegetables</h1>
+          <input className="search" type="text" placeholder="Search..." onChange={onChange} />
+        </div>
         <div className="grid">
-          {products.length === 0 && <Loader />}
-          {products.map(product =>
+          {status === 'fetching' && <Loader />}
+          {status === 'ok'
+            && filteredProducts.length === 0
+            && <p>No result.</p>}
+          {status === 'ok' && filteredProducts.map(product =>
             <div className="col" key={product.product_id} >
               <Link to={`/list/${product.product_id}`}>
                 <ProductCard product={product} />
               </Link>
             </div>)}
+            {status === 'error' && <p>Custom error component goes here.</p>}
         </div>
       </div>
     );
