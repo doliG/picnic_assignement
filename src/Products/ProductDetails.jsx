@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Loader from '../Utils/Loader';
-import './ProductDetails.css';
+import React, { Component } from "react";
+import Loader from "../Utils/Loader";
+import "./ProductDetails.css";
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -11,32 +11,32 @@ class ProductDetails extends Component {
       name: undefined,
       price: undefined,
       product_id: undefined,
-      status: 'fetching' // 'fetching' || 'ok' || 'error'
+      status: "fetching" // 'fetching' || 'ok' || 'error'
     };
   }
 
   componentWillMount() {
-    const url = "https://s3-eu-west-1.amazonaws.com/developer-application-test/cart/{product_id}/detail";
+    const url =
+      "https://s3-eu-west-1.amazonaws.com/developer-application-test/cart/{product_id}/detail";
     const product_id = parseInt(this.props.match.params.id);
 
     fetch(url.replace("{product_id}", product_id))
       .then(res => {
         if (res.status === 200)
           res.json().then(data => {
-            this.setState({ ...data, status: 'ok' });
+            this.setState({ ...data, status: "ok" });
             console.log(data);
           });
-        else
-          this.setState({ status: 'error' });
+        else this.setState({ status: "error" });
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err) && this.setState({ status: "error" }));
   }
 
   render() {
     const { name, description, image, price, status } = this.state;
 
     switch (status) {
-      case 'ok':
+      case "ok":
         return (
           <div className="container product">
             <img className="product-image" src={image} alt={name} />
@@ -47,9 +47,9 @@ class ProductDetails extends Component {
             </div>
           </div>
         );
-      case 'error':
+      case "error":
         return <p>Error component goes here</p>;
-      case 'fetching':
+      case "fetching":
         return <Loader />;
     }
   }
