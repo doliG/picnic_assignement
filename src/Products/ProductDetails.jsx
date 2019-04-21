@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loader from '../Utils/Loader';
 import './ProductDetails.css';
 
 class ProductDetails extends Component {
@@ -9,7 +10,8 @@ class ProductDetails extends Component {
       image: undefined,
       name: undefined,
       price: undefined,
-      product_id: undefined
+      product_id: undefined,
+      status: 'fetching' // 'fetching' || 'ok' || 'error'
     };
   }
 
@@ -19,26 +21,37 @@ class ProductDetails extends Component {
 
     fetch(url.replace("{product_id}", product_id))
       .then(res => {
-        res.json().then(data => {
-          this.setState({ ...data });
-          console.log(data);
-        });
+        if (res.status === 200)
+          res.json().then(data => {
+            this.setState({ ...data, status: 'ok' });
+            console.log(data);
+          });
+        else
+          this.setState({ status: 'error' });
       })
       .catch(err => console.error(err));
   }
 
   render() {
-    const { name, description, image, price } = this.state;
-    return (
-      <div className="container product">
-        <img className="product-image" src={image} alt={name} />
-        <div className="product-content">
-          <h1>{name}</h1>
-          <p className="product-content-price">{price}$</p>
-          <p>{description}</p>
-        </div>
-      </div>
-    );
+    const { name, description, image, price, status } = this.state;
+
+    switch (status) {
+      case 'ok':
+        return (
+          <div className="container product">
+            <img className="product-image" src={image} alt={name} />
+            <div className="product-content">
+              <h1>{name}</h1>
+              <p className="product-content-price">{price}$</p>
+              <p>{description}</p>
+            </div>
+          </div>
+        );
+      case 'error':
+        return <p>Error component goes here</p>;
+      case 'fetching':
+        return <Loader />;
+    }
   }
 }
 export default ProductDetails;
