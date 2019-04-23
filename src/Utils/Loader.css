@@ -7,6 +7,12 @@
   }
 }
 
+.loader {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
 .loader-heart {
   color: #e74c3c;
   padding: 0 15px;

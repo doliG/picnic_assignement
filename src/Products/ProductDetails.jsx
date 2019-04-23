@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Loader from "../Utils/Loader";
+import Error from "../Utils/Error";
 import "./ProductDetails.css";
 
 class ProductDetails extends Component {
@@ -34,10 +35,19 @@ class ProductDetails extends Component {
 
   render() {
     const { name, description, image, price, status } = this.state;
+    const errorMessage =
+      "Error: we cannot load this article. Maybe it doesn't exist or it has been deleted...";
 
     switch (status) {
       default:
+      case "fetching":
         return <Loader />;
+      case "error":
+        return (
+          <div className="container">
+            <Error message={errorMessage} />
+          </div>
+        );
       case "ok":
         return (
           <div className="container product">
@@ -49,10 +59,6 @@ class ProductDetails extends Component {
             </div>
           </div>
         );
-      case "error":
-        return <p>Error component goes here</p>;
-      case "fetching":
-        return <Loader />;
     }
   }
 }

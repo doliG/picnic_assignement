@@ -60,7 +60,6 @@ class ProductsList extends Component {
 
     switch (status) {
       default:
-        return <Loader />;
       case "fetching":
         return <Loader />;
       case "error":

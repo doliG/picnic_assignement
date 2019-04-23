@@ -1,0 +1,8 @@
+.error {
+  background-color: lightcoral;
+  border: 5px solid lightcoral;
+  color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  font-size: 1.2rem;
+}
