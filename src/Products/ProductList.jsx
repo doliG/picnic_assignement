@@ -42,8 +42,12 @@ class ProductsList extends Component {
 
   onChange(evt) {
     const wanted = evt.target.value;
-    if (!wanted) this.setState({ filteredProducts: products });
     const { products } = this.state;
+
+    if (!wanted) {
+      this.setState({ filteredProducts: products });
+      return;
+    }
     const filteredProducts = products.filter(p =>
       p.name.toLowerCase().includes(wanted.toLowerCase())
     );
@@ -55,6 +59,8 @@ class ProductsList extends Component {
     const { onChange } = this;
 
     switch (status) {
+      default:
+        return <Loader />;
       case "fetching":
         return <Loader />;
       case "error":

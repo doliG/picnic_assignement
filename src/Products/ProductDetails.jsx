@@ -36,6 +36,8 @@ class ProductDetails extends Component {
     const { name, description, image, price, status } = this.state;
 
     switch (status) {
+      default:
+        return <Loader />;
       case "ok":
         return (
           <div className="container product">
