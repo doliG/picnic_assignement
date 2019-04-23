@@ -15,7 +15,7 @@ class ProductDetails extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const url =
       "https://s3-eu-west-1.amazonaws.com/developer-application-test/cart/{product_id}/detail";
     const product_id = parseInt(this.props.match.params.id);

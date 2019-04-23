@@ -17,7 +17,7 @@ class ProductsList extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const url =
       "https://s3-eu-west-1.amazonaws.com/developer-application-test/cart/list";
 
