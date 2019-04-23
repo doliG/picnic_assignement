@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 
 import ProductCard from "./ProductCard";
 import Loader from "../Utils/Loader";
+import Info from "../Utils/Info";
 
 import "./ProductList.css";
 
@@ -66,7 +67,7 @@ class ProductsList extends Component {
         return <p>Custom error component goes here.</p>;
       case "ok":
         return (
-          <div>
+          <Fragment>
             <div className="content-width">
               <h1 className="page-title">Fresh fruits and vegetables</h1>
               <input
@@ -77,7 +78,7 @@ class ProductsList extends Component {
               />
             </div>
             <div className="grid">
-              {filteredProducts.length === 0 && <p>No result.</p>}
+              {filteredProducts.length === 0 && <Info message={"No result."} />}
               {filteredProducts.map(product => (
                 <div className="col" key={product.product_id}>
                   {/* Note that I didn't implement the popup cause I didn't finish in the given time (< 2h)
@@ -88,7 +89,7 @@ class ProductsList extends Component {
                 </div>
               ))}
             </div>
-          </div>
+          </Fragment>
         );
     }
   }

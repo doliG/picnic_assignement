@@ -1,0 +1,9 @@
+.info {
+  background-color: lightblue;
+  border: 5px solid lightblue;
+  color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  font-size: 1.2rem;
+  flex-grow: 1;
+}

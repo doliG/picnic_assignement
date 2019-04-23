@@ -19,7 +19,7 @@ class ProductDetails extends Component {
   componentDidMount() {
     const url =
       "https://s3-eu-west-1.amazonaws.com/developer-application-test/cart/{product_id}/detail";
-    const product_id = parseInt(this.props.match.params.id);
+    const product_id = this.props.match.params.id;
 
     fetch(url.replace("{product_id}", product_id))
       .then(res => {
